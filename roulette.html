@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roulette Web</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #0A0A0A;
+    color: #B89C6F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  h1 { margin-bottom: 10px; }
+
+  .wallet { margin-bottom: 20px; font-size: 18px; }
+
+  /* Tapis */
+  .table {
+    display: flex;
+    flex-wrap: wrap;
+    width: 360px;
+    margin-bottom: 20px;
+    border: 2px solid #B89C6F;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #7C243B;
+    font-weight: bold;
+  }
+
+  .cell.red { background: red; color: white; }
+  .cell.black { background: black; color: white; }
+  .cell.green { background: green; color: white; }
+
+  .cell.selected {
+    outline: 3px solid yellow;
+  }
+
+  /* Roulette */
+  .roulette-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #B89C6F;
+    margin-bottom: 20px;
+  }
+
+  .wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(0deg);
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .segment {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0% 0%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #7C243B;
+    color: white;
+  }
+
+  .pointer {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #B89C6F;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 1px solid #7C243B;
+    border-radius: 4px;
+    background: #B89C6F;
+    color: #022;
+    cursor: pointer;
+  }
+
+  #controls { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  #controls input { width: 80px; padding: 5px; border-radius: 4px; border: 1px solid #7C243B; background: #0A0A0A; color: #B89C6F; }
+  #controls select { padding: 5px; border-radius: 4px; border: 1px solid #7C243B; background: #0A0A0A; color: #B89C6F; }
+</style>
+</head>
+<body>
+
+<h1>Roulette Web</h1>
+<div class="wallet" id="wallet">Wallet : 500</div>
+
+<div id="controls">
+  <input type="number" id="mise" placeholder="Mise" min="1">
+  <select id="typeMise">
+    <option value="number">Nombre</option>
+    <option value="color">Couleur</option>
+  </select>
+  <input type="text" id="valeurMise" placeholder="Numéro ou R/N/V">
+  <button id="spinBtn">Lancer</button>
+</div>
+
+<div class="pointer"></div>
+<div class="roulette-container">
+  <div class="wheel" id="wheel"></div>
+</div>
+
+<div id="result" style="margin-top:20px; font-size:18px;"></div>
+
+<div class="table" id="table"></div>
+
+<script>
+const numbers = [
+  {num: 0, color: 'green'}, 
+  {num: 32, color:'red'}, {num: 15, color:'black'}, {num: 19, color:'red'}, {num:4,color:'black'},
+  {num:21,color:'red'}, {num:2,color:'black'}, {num:25,color:'red'}, {num:17,color:'black'},
+  {num:34,color:'red'}, {num:6,color:'black'}, {num:27,color:'red'}, {num:13,color:'black'},
+  {num:36,color:'red'}, {num:11,color:'black'}, {num:30,color:'red'}, {num:8,color:'black'},
+  {num:23,color:'red'}, {num:10,color:'black'}, {num:5,color:'red'}, {num:24,color:'black'},
+  {num:16,color:'red'}, {num:33,color:'black'}, {num:1,color:'red'}, {num:20,color:'black'},
+  {num:14,color:'red'}, {num:31,color:'black'}, {num:9,color:'red'}, {num:22,color:'black'},
+  {num:18,color:'red'}, {num:29,color:'black'}, {num:7,color:'red'}, {num:28,color:'black'},
+  {num:12,color:'red'}, {num:35,color:'black'}, {num:3,color:'red'}, {num:26,color:'black'}
+];
+
+let wallet = 500;
+
+// Création du tapis
+const table = document.getElementById('table');
+numbers.forEach(n => {
+  const cell = document.createElement('div');
+  cell.className = 'cell ' + n.color;
+  cell.textContent = n.num;
+  table.appendChild(cell);
+});
+
+// Création de la roulette
+const wheel = document.getElementById('wheel');
+numbers.forEach((n,i)=>{
+  const segment = document.createElement('div');
+  segment.className = 'segment';
+  segment.style.transform = `rotate(${i * (360/numbers.length)}deg) skewY(-${90 - (360/numbers.length)}deg)`;
+  segment.style.background = n.color;
+  segment.textContent = n.num;
+  wheel.appendChild(segment);
+});
+
+document.getElementById('spinBtn').addEventListener('click', ()=>{
+  const mise = parseInt(document.getElementById('mise').value);
+  const typeMise = document.getElementById('typeMise').value;
+  const valeurMise = document.getElementById('valeurMise').value.toUpperCase();
+
+  if(isNaN(mise) || mise < 1 || mise > wallet){
+    alert('Mise invalide');
+    return;
+  }
+
+  const spins = 6;
+  const angle = 360 / numbers.length;
+  const randomIndex = Math.floor(Math.random() * numbers.length);
+  const targetAngle = 360*spins - randomIndex*angle - angle/2;
+
+  wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
+  wheel.style.transform = `rotate(${targetAngle}deg)`;
+
+  setTimeout(()=>{
+    const resultNumber = numbers[randomIndex];
+    let win = false;
+
+    if(typeMise === 'number'){
+      if(parseInt(valeurMise) === resultNumber.num) win = true;
+    } else if(typeMise === 'color'){
+      if(valeurMise === 'R' && resultNumber.color==='red') win = true;
+      if(valeurMise === 'N' && resultNumber.color==='black') win = true;
+      if(valeurMise === 'V' && resultNumber.color==='green') win = true;
+    }
+
+    let gain = 0;
+    if(win){
+      if(typeMise==='number') gain = mise*35;
+      else gain = mise;
+      wallet += gain;
+      document.getElementById('result').textContent = `Résultat : ${resultNumber.num} (${resultNumber.color}) — Gagné ! Vous gagnez ${gain}`;
+    } else {
+      wallet -= mise;
+      document.getElementById('result').textContent = `Résultat : ${resultNumber.num} (${resultNumber.color}) — Perdu ! Vous perdez ${mise}`;
+    }
+
+    document.getElementById('wallet').textContent = `Wallet : ${wallet}`;
+
+  }, 4000);
+});
+</script>
+
+</body>
+</html>
