@@ -1,181 +1,266 @@
 <!doctype html>
 <html lang="fr">
 <head>
-   <link rel="stylesheet" href="styletest.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cours — Texas Hold'em</title>
+  <title>Thème 1 — Cours : Texas Hold'em</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0A0A0A;
+      --panel:#0F0F10;
+      --muted:#BFC2C6;
+      --accent:#CFA45A; /* or vieilli */
+      --card-bg:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --radius:12px;
+      --container-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;font-family:Roboto,system-ui,Arial,sans-serif;background:var(--bg);color:#EAEAEA;line-height:1.45;padding:24px;display:flex;justify-content:center;
+    }
+    .wrap{width:100%;max-width:var(--container-width)}
+
+    header.header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}
+    .logo h1{font-family:'Playfair Display',serif;margin:0;font-weight:700;font-size:22px;color:var(--accent)}
+    .nav-menu ul{list-style:none;margin:0;padding:0;display:flex;gap:12px}
+    .nav-menu a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px}
+    .nav-menu a.active{font-weight:700;color:#fff;background:rgba(255,255,255,0.03)}
+
+    .theme-1{background:var(--panel);padding:22px;border-radius:16px;box-shadow:0 6px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .theme-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .theme-header h2{margin:0;font-family:'Playfair Display',serif;color:var(--accent)}
+    .meta{color:var(--muted);font-size:13px}
+
+    /* grid for courses */
+    .courses{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.courses{grid-template-columns:repeat(2,1fr)}}
+
+    .card{background:var(--card-bg);padding:18px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02)}
+    .card h3{margin-top:0;color:#fff}
+    .small{color:var(--muted);font-size:14px}
+
+    /* image */
+    .image-container{width:100%;display:flex;justify-content:center;margin:12px 0}
+    .image-container img{max-width:100%;height:auto;border-radius:8px}
+
+    hr.divider{border:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.06),rgba(255,255,255,0));margin:20px 0}
+
+    /* lists and examples */
+    dl{margin:0}
+    dt{font-weight:700;margin-top:10px}
+    dd{margin-left:0;margin-bottom:8px;color:var(--muted)}
+
+    .note{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;color:var(--muted);font-size:13px}
+
+    footer.footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* quick table */
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left;color:var(--muted);font-size:14px}
+    th{color:#fff}
+
+    .toc{display:flex;gap:8px;flex-wrap:wrap}
+    .toc a{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:13px}
+
+  </style>
 </head>
-<style>
-    .social-media {
-      margin-bottom: 15px; 
-    }
-   body{margin:18px;background:#0A0A0A}
-      ;background:#0A0A0A;}
-    .image-container {
-     width: 10%; 
-     height: auto;
-     border-radius: 8px;
-}
-    }
-   </style>
 <body>
-   <header class="header">
-        <div class="logo">
-            <h1>Club Poker LLG</h1>
-        </div>
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="outils.html">Outils de jeu</a></li>
-                <li><a style="font-weight: bold;" href="cours.html">Cours</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
-                </ul>
-        </nav>
+  <div class="wrap">
+    <header class="header">
+      <div class="logo"><h1>Club Poker LLG</h1><div class="meta">Thème 1 — Fondamentaux</div></div>
+      <nav class="nav-menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="outils.html">Outils de jeu</a></li>
+          <li><a class="active" href="cours.html">Cours</a></li>
+          <li><a href="connexion.html">Connexion</a></li>
+        </ul>
+      </nav>
     </header>
-  <h1>Cours 1 : Les combinaisons</h1>
-  <p class="small"> Au poker Texas Hold’em, le but est de former la meilleure main possible avec 5 cartes, en utilisant tes 2 cartes personnelles et les 5 cartes communes sur la table.
-Voici les principales combinaisons, de la plus forte à la plus faible : <br />
- <br />
-Quinte flush royale ♠️ <br />
-La main la plus rare : 10, Valet, Dame, Roi et As de la même couleur.<br />
- <br />
-Quinte flush<br />
-Cinq cartes qui se suivent et de la même couleur (ex : 5♣ 6♣ 7♣ 8♣ 9♣).<br />
- <br />
-Carré<br />
-Quatre cartes de même valeur (ex : quatre 7).<br />
- <br />
-Full<br />
-Trois cartes de même valeur + une paire (ex : trois Rois et deux Dames).<br />
- <br />
-Couleur (flush)<br />
-Cinq cartes de la même couleur, mais qui ne se suivent pas forcément.<br />
- <br />
-Suite (quinte)<br />
-Cinq cartes qui se suivent, mais pas forcément de la même couleur.<br />
- <br />
-Brelan<br />
-Trois cartes de même valeur.<br />
- <br />
-Double paire<br />
-Deux paires différentes (ex : deux 9 et deux 5).<br />
- <br />
-Paire<br />
-Deux cartes de même valeur.<br />
- <br />
-Carte haute<br />
-Si personne n’a de combinaison, la carte la plus forte gagne.<br /></p>
 
-    <div class="image-container">
-    <img src="combin.jpg" width="300" height=auto>
+    <main class="theme-1" id="theme-1">
+      <div class="theme-header">
+        <div>
+          <h2>Thème 1 — Fondamentaux du Texas Hold'em</h2>
+          <p class="meta">Introduction claire et structurée pour débuter : combinaisons, mains de départ, position, stack et stratégies.</p>
+        </div>
+        <div class="toc" aria-hidden="false">
+          <a href="#cours-1">Combinaisons</a>
+          <a href="#cours-2">Mains de départ</a>
+          <a href="#position">Position</a>
+          <a href="#stack">Stack (tapis)</a>
+          <a href="#cours-4">Stratégies</a>
+        </div>
+      </div>
+
+      <section id="cours-1" class="card">
+        <h3>Cours 1 — Les combinaisons (rapide et clair)</h3>
+        <p class="small">Au Texas Hold’em, chaque joueur construit la meilleure main de 5 cartes à partir de ses 2 cartes privées et des 5 cartes communes. Ci‑dessous, de la main la plus forte à la plus faible :</p>
+
+        <dl>
+          <dt>Quinte flush royale</dt>
+          <dd>10‑V‑D‑R‑A de la même couleur — la main la plus rare (ex : 10♠ J♠ Q♠ K♠ A♠).</dd>
+
+          <dt>Quinte flush</dt>
+          <dd>Cinq cartes consécutives de même couleur (ex : 5♣‑9♣).</dd>
+
+          <dt>Carré</dt>
+          <dd>Quatre cartes de même valeur (ex : 7♠ 7♥ 7♦ 7♣ + 1 carte kickeur).</dd>
+
+          <dt>Full</dt>
+          <dd>Trois cartes identiques + une paire (ex : 3 Rois + 2 Dames).</dd>
+
+          <dt>Couleur (flush)</dt>
+          <dd>Cinq cartes de la même couleur, non consécutives obligatoirement.</dd>
+
+          <dt>Suite (quinte)</dt>
+          <dd>Cinq cartes consécutives de couleurs différentes ou mélangées.</dd>
+
+          <dt>Brelan</dt>
+          <dd>Trois cartes de même valeur.</dd>
+
+          <dt>Double paire</dt>
+          <dd>Deux paires distinctes (ex : deux 9 + deux 5 + une carte kickeur).</dd>
+
+          <dt>Paire</dt>
+          <dd>Deux cartes de même valeur.</dd>
+
+          <dt>Carte haute</dt>
+          <dd>Lorsque personne n’a de combinaison, on compare la carte la plus forte, puis la suivante, etc.</dd>
+        </dl>
+
+        <div class="image-container">
+          <img src="combin.jpg" alt="Schéma des combinaisons de poker"/>
+        </div>
+        <p class="note">Astuce : mémorise l'ordre des combinaisons et entraîne-toi à identifier la main gagnante rapidement — c'est la base pour prendre des décisions post‑flop.</p>
+      </section>
+
+      <section id="cours-2" class="card">
+        <h3>Cours 2 — Les mains de départ : quand jouer, quand folder</h3>
+        <p class="small">Toutes les mains ne se valent pas. L'objectif ici est d'identifier des catégories simples et des exemples concrets pour la prise de décision pré‑flop.</p>
+
+        <h4>Mains premium (ouvrir / relancer presque toujours)</h4>
+        <p>AA, KK, QQ, JJ, AKs / AKo — jouer agressivement pour construire le pot et isoler des adversaires plus faibles.</p>
+
+        <h4>Mains fortes mais vulnérables</h4>
+        <p>AQ, AJ, KQ, TT, 99 — bonnes mains mais souvent dominées ; attention aux 3‑bets et aux boards dangereux.</p>
+
+        <h4>Mains spéculatives (value si elles touchent)</h4>
+        <p>Petites paires (22–88), suited connectors (54s, 76s, 98s), Ax suités — jouent très bien en multiway ou deepstack.</p>
+
+        <h4>Mains à éviter</h4>
+        <p>Cartes dépareillées faibles (J3o, 92o…) — fold pré‑flop sauf en situations très spécifiques.</p>
+
+        <table aria-label="Exemples de mains et actions recommandées">
+          <thead><tr><th>Situation</th><th>Exemple</th><th>Action recommandée</th></tr></thead>
+          <tbody>
+            <tr><td>UTG / deep</td><td>AKs</td><td>Relancer (position serrée)</td></tr>
+            <tr><td>Bouton / multiway</td><td>65s</td><td>Open / call pour jouer le post‑flop</td></tr>
+            <tr><td>SB / shortstack</td><td>J4o</td><td>Fold (hors vol des blinds)</td></tr>
+          </tbody>
+        </table>
+
+        <p class="note">Règle pratique : adapte toujours tes ranges selon la position et les tendances adverses (serré / large / agressif / passif).</p>
+      </section>
+
+      <section id="position" class="card">
+        <h3>Cours 3A — La position à la table (séparé du tapis)</h3>
+        <p class="small">La position est l'un des facteurs les plus importants pour évaluer la valeur d'une main et orienter ton style de jeu.</p>
+
+        <h4>Early position (UTG, UTG+1…)</h4>
+        <p>Peu d'information : joue serré (principalement mains premium et quelques paires hautes).</p>
+
+        <h4>Middle position</h4>
+        <p>Tu peux ouvrir ton éventail ; privilégie des mains solides et quelques connects suited selon le confort post‑flop.</p>
+
+        <h4>Late position (Cutoff, Bouton)</h4>
+        <p>Meilleure position : tu joues en dernier après le flop. Permet de voler les blinds, décaler tes ranges et exploiter des adversaires faibles.</p>
+
+        <h4>Blinds (SB / BB)</h4>
+        <p>Positions forcées par mise d'entrée : défends en fonction du prix et de l'adversaire, mais attention au jeu hors position post‑flop.</p>
+
+        <div class="note">Conseil : en late, augmente la fréquence d'ouverture (steal) et introduis plus de 3‑bets d'équité et de bluff selon les players.</div>
+      </section>
+
+      <section id="stack" class="card">
+        <h3>Cours 3B — Le tapis (stack) — gestion et implications</h3>
+        <p class="small">Le nombre de big blinds que tu as change complètement la stratégie — sépare toujours décisions selon le stack.</p>
+
+        <h4>Short stack &lt; 20 BB</h4>
+        <p>Jeu push/fold : la gamme utile est réduite — souvent all‑in ou fold. Priorise mains à forte équité vs call all‑in (paires, A‑X suited, KQ selon situation).</p>
+
+        <h4>20–50 BB (stack moyen)</h4>
+        <p>Jeu plus standard : relances, 3‑bets, mais prudence sur gros bluffs ; shove non optimal sauf spots précis.</p>
+
+        <h4>&gt; 50 BB (deepstack)</h4>
+        <p>Large latitude post‑flop : plus de mains spéculatives, pièges, float et multi‑street value betting.</p>
+
+        <h4>Exemples pratiques</h4>
+        <ul>
+          <li>12 BB au bouton avec A7s → shove souvent + EV positif selon adversaires.</li>
+          <li>100 BB en fin de parole → open large (suited connectors, petites paires).</li>
+          <li>15 BB en early position → joue uniquement mains fortes (AA, KK, QQ, AK).</li>
+        </ul>
+
+        <div class="note">Règle : la profondeur du tapis dicte si tu dois jouer pour la valeur (deep) ou pour l'équité finale (short).</div>
+      </section>
+
+      <section id="cours-4" class="card">
+        <h3>Cours 4 — Stratégies de jeu (essentiel pour progresser)</h3>
+        <p class="small">Présentation des approches stratégiques et des notions pratiques à intégrer au jeu.</p>
+
+        <h4>1) Tight‑Aggressive (TAG)</h4>
+        <p>Style recommandé pour la majorité : sélection serrée des mains mais jeu agressif (relances/3‑bets). Avantage : retire de la valeur et contrôle les pots.</p>
+
+        <h4>2) Loose‑Aggressive (LAG)</h4>
+        <p>Plus large et agressif : beaucoup de vols, beaucoup de 3‑bets et de bluffs. Très profitable si maîtrisé, mais risque élevé de variance.</p>
+
+        <h4>3) Tight‑Passive &amp; Loose‑Passive</h4>
+        <p>Moins recommandés : passifs perdent de la value. Un joueur passif devrait apprendre à value bet plus souvent.</p>
+
+        <h4>4) Exploitative vs GTO (Game Theory Optimal)</h4>
+        <p>Exploitative : adapter son jeu aux faiblesses observées des adversaires. GTO : équilibre théorique pour être indétectable ; utile comme référence, mais souvent plus complexe à appliquer en live.</p>
+
+        <h4>5) Techniques clés</h4>
+        <ul>
+          <li><strong>Value betting</strong> : extraire le maximum quand tu as la meilleure main.</li>
+          <li><strong>Bluff</strong> : choisir spots où la range adverse est faible / fold equity élevée.</li>
+          <li><strong>Pot control</strong> : garder la taille du pot modérée quand tu as une main moyenne.</li>
+          <li><strong>3‑bet sizing</strong> : adapter la taille selon le but (fold equity vs iso).</li>
+          <li><strong>ICM (tournois)</strong> : considère l'impact des gains sur ta décision d'all‑in / call.</li>
+        </ul>
+
+        <h4>6) Exemple de plan d'apprentissage</h4>
+        <ol>
+          <li>Travaille la sélection de mains (ranges) selon la position.</li>
+          <li>Entraîne-toi à identifier la range adverse sur chaque street.</li>
+          <li>Étudie les situations de 3‑bet/4‑bet et les réponses push/fold.</li>
+          <li>Analyse tes sessions : river shows, mains clés, erreurs récurrentes.</li>
+        </ol>
+
+        <div class="note">Application : choisis une stratégie principale (ex. TAG) et étends progressivement des éléments LAG ou exploitants en fonction des adversaires.</div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="card">
+        <h3>Ressources &amp; bonnes pratiques</h3>
+        <p class="small">Pour progresser : étudie mains réelles, utilise un tracker en ligne si tu joues en ligne, révise les spots importants, et joue de façon disciplinée.</p>
+        <ul>
+          <li>Fais des revues de mains régulières (1 session = 10 mains clés).</li>
+          <li>Pratique le push/fold en simulation pour <20 BB.</li>
+          <li>Lis des articles ou vidéos sur les 3‑bets et la construction de ranges.</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <p>Page codée par le président du Club Poker — Club Poker LLG • 2025</p>
+      </footer>
+
+    </main>
   </div>
-   
-<hr style="border: 1px solid var(--or-vieilli); margin: 30px 0;">
-   
-<h1>Cours 2 : Les mains de départ — quand jouer quelles cartes ?</h1>
-<p>
-Au poker, toutes les mains ne se valent pas. Certaines sont très fortes, d’autres doivent être jouées avec prudence, et beaucoup doivent simplement être jetées. Voici les grandes catégories pour t’aider :
-</p>
-
-<h3>1. Les mains premium (à relancer presque toujours)</h3>
-<p>
-AA, KK, QQ, JJ, AK.  
-Ce sont les mains les plus fortes du Texas Hold’em : elles doivent être jouées agressivement pour prendre de la valeur.
-</p>
-
-<h3>2. Les mains fortes mais sensibles</h3>
-<p>
-AQ, AJ, KQ, TT, 99.  
-Très bonnes mains, mais attention aux relances adverses car elles peuvent être dominées.
-</p>
-
-<h3>3. Les mains qui aiment les flops (mains spéculatives)</h3>
-<p>
-Petites paires (22–88), suited connectors (54s, 76s…), Ax suités.  
-Elles gagnent de gros pots quand elles touchent une couleur, une suite ou un brelan.
-</p>
-
-<h3>4. Les mains à éviter</h3>
-<p>
-Les mains dépareillées faibles comme J3o, 92o, 84o…  
-Elles perdent souvent beaucoup d’argent : fold directement.
-</p>
-
-<hr style="border: 1px solid var(--or-vieilli); margin: 30px 0;">
-
-
-<h1>Cours 3 : La position et le tapis — deux facteurs essentiels</h1>
-<p>
-Même avec les meilleures cartes du monde, ta position et ton tapis influencent totalement les décisions à prendre.
-</p>
-
-<h2>1. La position à la table</h2>
-
-<h3>Early position (UTG, UTG+1…)</h3>
-<p>
-Tu joues parmi les premiers → tu n’as pas d’informations.  
-➡️ Joue très serré : uniquement les bonnes mains.
-</p>
-
-<h3>Middle position</h3>
-<p>
-Tu peux commencer à élargir un peu tes mains jouées, mais reste prudent.
-</p>
-
-<h3>Late position (Cutoff, Bouton)</h3>
-<p>
-La meilleure position. Tu joues en dernier.  
-➡️ Tu peux voler les blinds, bluffer plus souvent, et jouer plus large.
-</p>
-
-<h3>Les blinds (SB et BB)</h3>
-<p>
-Positions défensives. Tu as déjà mis de l’argent, mais tu joues hors position.  
-➡️ Défends intelligemment, mais reste prudent post-flop.
-</p>
-
-<br>
-
-<h2>2. Le tapis (stack) — exprimé en big blinds (BB)</h2>
-
-<h3>Moins de 20 BB : shortstack</h3>
-<p>
-Tu dois jouer agressif : souvent all-in ou fold. C’est la stratégie la plus rentable.
-</p>
-
-<h3>20–50 BB : stack moyen</h3>
-<p>
-Tu peux jouer « standard », relancer normal, 3-bet occasionnellement, mais évite les gros bluffs.
-</p>
-
-<h3>Plus de 50 BB : deepstack</h3>
-<p>
-Tu peux jouer plus de mains spéculatives et tenter des stratégies post-flop plus avancées.
-</p>
-
-<br>
-
-<h3>Exemples rapides</h3>
-<p>
-• 12 BB au bouton avec A7s → shove souvent rentable. <br>
-• 100 BB en fin de parole → tu peux ouvrir plus large (petites paires, suited connectors). <br>
-• 15 BB en early → ne joue que des mains fortes, pas de mains marginales.
-</p>
-
-
-  <div class="social-media">
-                    <a href="index.html" class="social-icon">Retour à la home page</a> 
-  </div>
-
-  <div class="social-media">
-            <p class="small">Page codée par l'humble président du Club poker</p>
-  </div>
-
-
-   <footer class="footer">
-        <p>2025 Club Poker LLG</p>
-    </footer>
 </body>
 </html>
+
