@@ -3,99 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Poker LLG</title>
+    <title>Club Poker LLG — Classement</title>
+
     <link rel="stylesheet" href="styletest.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Centrage et responsive du tableau */
+        .table-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            min-width: 400px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+        }
+
+        thead th {
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
 
-    <header class="header">
-        <div class="logo">
-            <h1>Club Poker LLG</h1>
-        </div>
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="outils.html">Outils de jeu</a></li>
-                <li><a href="cours.html">Cours</a></li>
-                <li><a style="font-weight: bold;" href="connexion.html">Classement</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
-                </ul>
-        </nav>
-    </header>
+<header class="header">
+    <div class="logo">
+        <h1>Club Poker LLG</h1>
+    </div>
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="outils.html">Outils de jeu</a></li>
+            <li><a href="cours.html">Cours</a></li>
+            <li><a style="font-weight: bold;" href="classement.html">Classement</a></li>
+            <li><a href="connexion.html">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main class="main-content">
-        <section class="hero-section">
-            <div class="hero-text">
-                <h1>CLASSEMENT</h1>
-              <table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Rank</th>
-      <th>Last</th>
-        
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Alex</td>
-      <td>1</td>
-      <td>1</td>
+<main class="main-content">
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>CLASSEMENT</h1>
 
-    </tr>
-    <tr>
-      <td>Lucas</td>
-      <td>2</td>
-      <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Mathis</td>
-      <td>3</td>
-              <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Enzo</td>
-      <td>4</td>
-              <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Hugo</td>
-      <td>5</td>
-              <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Nathan</td>
-      <td>6</td>
-              <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Théo</td>
-      <td>7</td>
-              <td>1</td>
-
-    </tr>
-    <tr>
-      <td>Louis</td>
-      <td>8</td>
-              <td>1</td>
-
-    </tr>
-  </tbody>
-</table>
-                
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Last</th>
+                            <th>Total</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alex</td>
+                            <td>1</td>
+                            <td>12</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Lucas</td>
+                            <td>1</td>
+                            <td>10</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Mathis</td>
+                            <td>1</td>
+                            <td>9</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Enzo</td>
+                            <td>1</td>
+                            <td>8</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Hugo</td>
+                            <td>1</td>
+                            <td>7</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Nathan</td>
+                            <td>1</td>
+                            <td>6</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Théo</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>Louis</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </section>
-    </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Club Poker LLG. Tous droits réservés.</p>
-    </footer>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 Club Poker LLG. Tous droits réservés.</p>
+</footer>
 
 </body>
 </html>
