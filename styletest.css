@@ -1,37 +1,56 @@
-
+/* 1. Variables et Reset */
 :root {
   --noir-onyx: #0A0A0A;
   --or-vieilli: #B89C6F;
   --rouge-bordeaux: #7C243B;
   --creme-ivoire: #F5F5DC;
+  --font-main: 'Roboto', sans-serif;
+  --font-title: 'Playfair Display', serif;
 }
 
+* {
+  box-sizing: border-box;
+}
 
 body {
   background-color: var(--noir-onyx);
   color: var(--creme-ivoire);
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-main);
   margin: 0;
   padding: 0;
   line-height: 1.6;
   text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* Fixe le fond pour un effet plus premium */
 }
 
+/* 2. Typographie & Liens */
 h1, h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-title);
   color: var(--or-vieilli);
+  margin-top: 0; /* Évite les décalages imprévus */
 }
 
 p {
   font-size: clamp(14px, 2.5vw, 18px);
-  line-height: 1.5;
   max-width: 600px;
   margin: 0 auto 30px;
 }
 
+a {
+  color: var(--or-vieilli);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover { color: var(--creme-ivoire); }
+
+/* 3. Header & Navigation */
 .header {
-  background-color: var(--noir-onyx);
-  padding: 20px 5%;
+  background-color: rgba(10, 10, 10, 0.9); /* Légère transparence */
+  padding: 15px 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,150 +67,82 @@ p {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.nav-menu li {
-  margin-left: 20px;
-}
-
+/* 4. Contenu Principal */
 .main-content {
   min-height: calc(100vh - 120px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 5%;
-}
-
-.hero-section {
-  max-width: 800px;
-  text-align: center;
+  padding: 40px 5%;
 }
 
 .hero-title {
   display: flex;
   justify-content: center;
   gap: 15px;
-  font-size: clamp(32px, 8vw, 80px);
+  font-size: clamp(40px, 10vw, 100px);
+  margin-bottom: 20px;
 }
-
-.hero-title span {
-  display: inline-block;
-}
-
-.hero-text h2 {
-  font-size: clamp(20px, 4vw, 36px);
-  margin-bottom: 10px;
-}
-
 
 .social-media {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
 }
 
 .social-media a {
-  display: inline-block;
   padding: 10px 20px;
   border: 1px solid var(--or-vieilli);
   font-weight: bold;
   text-transform: uppercase;
-  font-size: clamp(12px, 2.5vw, 14px);
-  text-align: center;
+  font-size: clamp(11px, 2vw, 14px);
 }
 
-
+/* 5. Footer */
 .footer {
   background-color: var(--rouge-bordeaux);
-  color: var(--creme-ivoire);
-  text-align: center;
   padding: 20px;
-  border: 2px solid var(--noir-onyx);
+  border-top: 2px solid var(--noir-onyx);
   font-size: clamp(12px, 2vw, 14px);
 }
 
+/* 6. Media Queries (Optimisées) */
 
+/* Gestion des backgrounds selon la taille */
 @media (max-width: 1000px) {
-  body {
-    background-image: url("pokertable_rotate.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .hero-title {
-    flex-direction: column;
-    gap: 5px; 
-  }
+  body { background-image: url("pokertable_rotate.jpg"); }
+  .hero-title { flex-direction: column; gap: 0; }
 }
 
 @media (min-width: 1001px) {
-  body {
-    background-image: url("pokertable2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
+  body { background-image: url("pokertable2.jpg"); }
 }
 
+/* Ajustements Spécifiques Mobile (Téléphone) */
 @media (max-width: 768px) {
   .header {
+    padding: 10px 5%; /* Réduit l'espace en haut du logo */
     flex-direction: column;
+    gap: 10px;
   }
 
   .nav-menu ul {
-    margin-top: 15px;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* On garde en ligne ou on passe en colonne selon ton choix */
+    font-size: 14px;
   }
 
-  .nav-menu li {
-    margin: 5px 0;
-  }
-
-  .social-media {
-    flex-direction: column;
-    align-items: center;
+  .main-content {
+    padding: 20px 5%; /* Réduit l'espace au-dessus du h1 de la section hero */
+    align-items: flex-start; /* Aligne vers le haut au lieu du centre si besoin */
+    padding-top: 10vh; /* Ajuste la position verticale */
   }
 
   .social-media a {
-    width: 80%;
-    margin: 10px 0;
-  }
-}
-
-a,
-a:visited,
-a:active {
-    color: var(--or-vieilli);   
-    text-decoration: none;      
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--creme-ivoire); 
-}
-
-.hero-title {
-  display: flex;
-  flex-direction: row;      
-  justify-content: center;
-  gap: 20px;                
-  font-size: clamp(48px, 10vw, 120px); 
-  text-align: center;
-}
-
-.hero-title span {
-  display: inline-block;
-}
-
-@media (max-width: 1000px) {
-  .hero-title {
-      flex-direction: column; 
-      gap: 5px;               
-      font-size: clamp(32px, 8vw, 80px); 
+    width: 100%;
+    max-width: 250px;
   }
 }
